@@ -1,4 +1,4 @@
-# DonationBay
+# WannaPlay
 
 Projektni zadatak iz kolegija [Web aplikacija](https://ntankovic.unipu.hr/wa) [Fakulteta informatike u Puli](https://fipu.unipu.hr/)
 

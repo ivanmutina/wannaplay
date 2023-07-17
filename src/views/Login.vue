@@ -14,7 +14,7 @@
                       <div class="section text-center">
                         <h4 class="mb-4 pb-3">Log In</h4>
                         <div class="form-group">
-                          <input v-model="email" type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off" />
+                          <input v-model="username" type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off" />
                           <i class="input-icon fas fa-at"></i>
                         </div>
                         <div class="form-group mt-2">
@@ -43,13 +43,13 @@ import { Auth } from "@/services";
 export default {
   data() {
     return {
-      email: "",
+      username: "",
       password: "",
     };
   },
   methods: {
     async login() {
-      let success = await Auth.login(this.email, this.password);
+      let success = await Auth.login(this.username, this.password);
       console.log("Rezultat prijave", success);
 
       if (success == true) {

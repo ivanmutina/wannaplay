@@ -1,6 +1,4 @@
-<template>
-  <h1>test</h1>
-</template>
+<template><p>test</p></template>
 
 <script>
 import { Auth } from "@/services";
