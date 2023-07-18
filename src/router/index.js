@@ -24,6 +24,14 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ "../views/Signup.vue"),
   },
+  {
+    path: "/change_pass",
+    name: "changePass",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ "../views/ChangePass.vue"),
+  },
 ];
 
 const router = createRouter({
@@ -32,7 +40,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ["/login", "/signup"];
+  const publicPages = ["/login", "/signup", "/change_pass"];
   // login potreban kada stranica na koju zelis ici nije u javnim stranicama
   const loginRequired = !publicPages.includes(to.path);
   const user = Auth.getUser();

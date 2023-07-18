@@ -5,24 +5,23 @@
         <div class="col-12 text-center align-self-center py-5">
           <div class="section pb-5 pt-5 pt-sm-2 text-center">
             <!-- kartica -->
-            <form @submit.prevent="login">
+            <form @submit.prevent="changePass">
               <div class="card-wrap mx-auto">
                 <div class="card-wrapper">
-                  <!-- log in dio -->
+                  <!-- change pass in dio -->
                   <div class="card">
                     <div class="center-wrap">
                       <div class="section text-center">
-                        <h4 class="mb-4 pb-3">Log In</h4>
+                        <h4 class="mb-4 pb-3">Change password</h4>
                         <div class="form-group">
-                          <input v-model="username" type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off" />
-                          <i class="input-icon fas fa-at"></i>
+                          <input v-model="old_password" type="email" name="oldpass" class="form-style" placeholder="Old password" id="logemail" autocomplete="off" />
+                          <i class="input-icon fas fa-unlock"></i>
                         </div>
                         <div class="form-group mt-2">
-                          <input v-model="password" type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off" />
+                          <input v-model="new_password" type="password" name="newpass" class="form-style" placeholder="New password" id="logpass" autocomplete="off" />
                           <i class="input-icon fas fa-lock"></i>
                         </div>
                         <button type="submit" class="btn mt-4">submit</button>
-                        <p class="mb-0 mt-4 text-center"><router-link to="/change_pass" class="link">Change your password?</router-link></p>
                       </div>
                     </div>
                   </div>
@@ -37,30 +36,6 @@
   </div>
 </template>
 
-<script>
-import { Auth } from "@/services";
-
-export default {
-  data() {
-    return {
-      username: "",
-      password: "",
-    };
-  },
-  methods: {
-    async login() {
-      let success = await Auth.login(this.username, this.password);
-      console.log("Rezultat prijave", success);
-
-      if (success == true) {
-        this.$router.push({ name: "home" });
-        window.location.reload();
-      }
-    },
-  },
-};
-</script>
-
 <style>
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 
@@ -71,14 +46,18 @@ body {
   background-color: #1f2029;
   overflow-x: hidden;
 }
-.link {
-  color: #c4c3ca;
+a {
   cursor: pointer;
   transition: all 200ms linear;
 }
+a:hover {
+  text-decoration: none;
+}
+.link {
+  color: #c4c3ca;
+}
 .link:hover {
   color: #ffeba7;
-  text-decoration: none;
 }
 p {
   font-weight: 500;
