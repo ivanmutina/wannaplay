@@ -1,3 +1,1 @@
-export default {
-  currentUser: "",
-};
+export default {};

@@ -26,7 +26,7 @@
             </li>
 
             <li class="nav-item">
-              <router-link v-if="auth.authenticated" class="nav-link" to="/login"><i class="fas fa-file-alt"></i><span>Add event</span></router-link>
+              <router-link v-if="auth.authenticated" class="nav-link" to="/add-event"><i class="fas fa-file-alt"></i><span>Add event</span></router-link>
             </li>
             <li class="nav-item">
               <router-link v-if="auth.authenticated" class="nav-link" to="/login"><i class="fas fa-user"></i><span>Profile</span></router-link>
