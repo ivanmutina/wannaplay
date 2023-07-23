@@ -85,6 +85,6 @@ span {
 }
 
 i {
-  margin-right: -6px;
+  margin-right: -13px;
 }
 </style>

@@ -22,7 +22,7 @@
                           <i class="input-icon fas fa-lock"></i>
                         </div>
                         <button type="submit" class="btn mt-4">submit</button>
-                        <p class="mb-0 mt-4 text-center"><router-link to="/change_pass" class="link">Change your password?</router-link></p>
+                        <p class="mb-0 mt-4 text-center"><router-link to="/change-pass" class="link">Change your password?</router-link></p>
                       </div>
                     </div>
                   </div>
