@@ -29,11 +29,6 @@ const routes = [
     name: "add-event",
     component: () => import("../views/AddEvent.vue"),
   },
-  {
-    path: "/post/:id",
-    name: "event",
-    component: () => import("../views/Event.vue"),
-  },
 ];
 
 const router = createRouter({
