@@ -5,9 +5,9 @@
       <div class="row mb-4 pb-2">
         <div class="col-md-8">
           <div class="text-md-start">
-            <h3 class="title mb-3 desc">Add event</h3>
+            <h3 class="title mb-3 desc">Edit event</h3>
 
-            <p class="mb-0 mt-4 desc">Please fill in all the necessary information to make the post more effective.</p>
+            <p class="mb-0 mt-4 desc">Please edit all the necessary information to make the post more effective.</p>
             <p class="desc">Good luck with finding players!</p>
           </div>
         </div>
@@ -20,7 +20,7 @@
           <div class="col-12 text-center align-self-center">
             <div class="section pb-5 text-center mb-5">
               <!--  -->
-              <form @submit.prevent="submitForm" ref="form" enctype="multipart/form-data">
+              <form @submit.prevent="updateForm" ref="form">
                 <div class="card-wrap mx-auto mb-5">
                   <div class="card-wrapper mb-5">
                     <!-- inputs -->
@@ -40,7 +40,7 @@
                             <i class="input-icon fas fa-clock"></i>
                           </div>
                           <div class="form-group mt-2">
-                            <input type="text" name="place" label="place" v-model="post.place" class="form-style" placeholder="Place" autocomplete="off" required />
+                            <input type="text" name="place" label="place" v-model="post.place" class="form-style" placeholder="PLace" autocomplete="off" required />
                             <i class="input-icon fas fa-map-marker-alt"></i>
                           </div>
                           <div class="form-group mt-2">
@@ -57,7 +57,7 @@
                             <small>All information will be publicly disclosed.</small>
                           </div>
 
-                          <button type="submit" class="btn mt-4">Submit</button>
+                          <button type="submit" class="btn mt-4">Update</button>
                         </div>
                       </div>
                     </div>
@@ -90,8 +90,13 @@ export default {
       },
     };
   },
+  async created() {
+    // uhvatim post po ID i ubacim to u formu
+    const response = await API.getPostByID(this.$route.params.id);
+    this.post = response;
+  },
   methods: {
-    async submitForm() {
+    async updateForm() {
       const formData = new FormData();
       formData.append("title", this.post.title);
       formData.append("date", this.post.date);
@@ -103,13 +108,23 @@ export default {
 
       // ako sve valja
       try {
-        const response = await API.addPost(formData);
+        const response = await API.updatePost(this.$route.params.id, formData);
         // prebaci odma na home
         this.$router.push({ name: "home" });
       } catch (error) {
         console.error("Error occurred while sending the request:", error);
       }
     },
+  },
+  mounted() {
+    // refresham stranicu kada se otvori
+    if (!sessionStorage.getItem("isPageRefreshed")) {
+      // osvježi stranicu samo ako nije već osvježena
+      sessionStorage.setItem("isPageRefreshed", "true");
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem("isPageRefreshed");
+    }
   },
 };
 </script>

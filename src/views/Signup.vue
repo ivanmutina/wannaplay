@@ -5,31 +5,31 @@
         <div class="col-12 text-center align-self-center py-5">
           <div class="section pb-5 pt-5 pt-sm-2 text-center">
             <!-- kartica -->
-            <div class="card-wrap mx-auto">
-              <div class="card-wrapper">
-                <!-- log in dio -->
-                <div class="card">
-                  <div class="center-wrap">
-                    <div class="section text-center">
-                      <h4 class="mb-4 pb-3">Sign Up</h4>
-                      <div class="form-group">
-                        <input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off" />
-                        <i class="input-icon fas fa-user"></i>
+            <form @submit.prevent="signup">
+              <div class="card-wrap mx-auto">
+                <div class="card-wrapper">
+                  <!-- sign up dio -->
+                  <div class="card">
+                    <div class="center-wrap">
+                      <div class="section text-center">
+                        <h4 class="mb-4 pb-3">Sign Up</h4>
+
+                        <div class="form-group mt-2">
+                          <input type="email" v-model="username" name="signupmail" class="form-style" placeholder="Your Email" id="signupmail" autocomplete="off" />
+                          <i class="input-icon fas fa-at"></i>
+                        </div>
+                        <div class="form-group mt-2">
+                          <input type="password" v-model="password" name="signpass" class="form-style" placeholder="Your Password" id="signpass" autocomplete="off" />
+                          <i class="input-icon fas fa-lock"></i>
+                        </div>
+                        <button type="submit" class="btn mt-4">submit</button>
                       </div>
-                      <div class="form-group mt-2">
-                        <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off" />
-                        <i class="input-icon fas fa-at"></i>
-                      </div>
-                      <div class="form-group mt-2">
-                        <input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off" />
-                        <i class="input-icon fas fa-lock"></i>
-                      </div>
-                      <a href="#" class="btn mt-4">submit</a>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
+            <!-- /kartica -->
           </div>
         </div>
       </div>
@@ -37,7 +37,32 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import { Auth } from "@/services";
+
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    async signup() {
+      try {
+        let success = await Auth.signup(this.username, this.password);
+        console.log("Rezultat prijave", success);
+
+        if (success == true) {
+          this.$router.push({ name: "login" });
+        }
+      } catch (err) {
+        console.error("Error:", err);
+      }
+    },
+  },
+};
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");

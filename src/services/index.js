@@ -15,6 +15,25 @@ let Auth = {
     localStorage.setItem("user", JSON.stringify(user));
     return true;
   },
+  async signup(new_username, new_password) {
+    try {
+      let response = await Service.post("/user", {
+        username: new_username,
+        password: new_password,
+      });
+
+      // data je axiosov atribut, uzmme podatke
+      let user = response.data;
+
+      // to spremi u localStorage stranice (ključ, vrijednost), pretvori u string
+      localStorage.setItem("user", JSON.stringify(user));
+      return true;
+    } catch (err) {
+      console.error("Greška prilikom registracije:", err);
+      // Obradite grešku (npr. prikažite poruku o grešci korisniku)
+      return false;
+    }
+  },
   logout() {
     localStorage.removeItem("user");
   },

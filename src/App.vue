@@ -17,7 +17,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-md-auto me-5">
+          <ul class="navbar-nav ms-md-auto me-3">
             <li class="nav-item">
               <router-link v-if="!auth.authenticated" class="nav-link" to="/login"><i class="fas fa-sign-in-alt nav-i"></i><span class="nav-span">Log In </span> </router-link>
             </li>
@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import store from "@/store.js";
 import { Auth } from "@/services";
 
 export default {
@@ -84,6 +83,6 @@ nav {
 }
 
 .nav-i {
-  margin-right: -10px;
+  margin-right: -11px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-5 main">
     <div class="container mt-5">
       <!-- prvi dio -->
       <div class="row mb-4 pb-2">
@@ -28,20 +28,22 @@
               <span class="badge rounded-pill float-md-end mb-3 mb-sm-0">{{ post.gender }}</span>
               <h5>{{ post.title }}</h5>
               <div class="mt-3">
-                <span> {{ post.content.substring(0, 40) + "..." }}</span>
+                <span> {{ post.description.substring(0, 40) + "..." }}</span>
                 <span class="d-block mt-1"><i class="far fa-calendar-alt" aria-hidden="true"></i> {{ post.date }}</span>
                 <span class="d-block"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> {{ post.place }}</span>
               </div>
               <!-- gumb -->
-              <div class="mt-3">
+              <div class="d-flex justify-content-between align-items-center mt-3">
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="modal(post._id)">View details</button>
+                <small class="created-text pt-4">Created {{ formatDate(post.created) }}</small>
               </div>
+
               <!-- /gumb -->
             </div>
           </div>
         </div>
+        <!-- /kartica -->
       </div>
-      <!-- /kartica -->
     </div>
 
     <!-- modal -->
@@ -56,17 +58,18 @@
           </div>
           <!-- modal body -->
           <div class="modal-body">
-            <p class="text-start"><i class="fas fa-info-circle"></i> {{ selectedPost.content }}</p>
+            <p class="text-start"><i class="fas fa-info-circle"></i> {{ selectedPost.description }}</p>
             <p class="text-start">
               The event will take place on <span class="post-span">{{ selectedPost.date }} </span> at <span class="post-span">{{ selectedPost.time }}</span> in <span class="post-span">{{ selectedPost.place }}.</span>
             </p>
+
             <p class="text-start"><i class="fas fa-phone"></i> +385 958128238</p>
           </div>
 
           <!-- modal footer -->
           <div class="modal-footer">
-            <button class="edit-btn">Edit</button>
-            <button class="close-btn">Delete</button>
+            <button class="edit-btn" @click="editPost(selectedPost._id)">Edit</button>
+            <button class="close-btn" @click="removePost(selectedPost._id)">Delete</button>
           </div>
         </div>
       </div>
@@ -103,6 +106,19 @@ export default {
         console.error(error);
       }
     },
+    formatDate(created) {
+      // formatiram created u dd.mm.yyyy
+      return new Date(created).toLocaleDateString("hr-HR");
+    },
+    editPost(postId) {
+      // preusmjeri na stranicu edit-event s odgovarajućim ID
+      this.$router.push({ name: "edit-event", params: { id: postId } });
+    },
+    async removePost(postId) {
+      const response = await API.deletePost(postId);
+      this.$router.push({ name: "home" });
+      window.location.reload();
+    },
   },
 };
 </script>
@@ -126,6 +142,12 @@ p {
   line-height: 1.7;
 }
 
+/* da je moguce scrollat */
+.main {
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
 /* prvi dio - opis */
 .desc {
   color: rgb(255, 254, 254);
@@ -136,29 +158,38 @@ p {
   background-color: #102770;
 }
 
+.created-text {
+  display: inline-block;
+  margin-left: auto;
+  font-size: 12px;
+  color: #c4c3ca;
+}
+
 /* gumb na kartici*/
-.btn {
+.card .btn {
   position: relative;
   font-weight: 550;
   font-size: 15px;
   line-height: 2;
   height: 50px;
   width: 150px;
+  white-space: nowrap;
   transition: all 200ms linear;
   border-radius: 5px;
   letter-spacing: 1px;
   cursor: pointer;
+  border: none;
   background-color: #102770;
   color: #ffeba7;
   box-shadow: 0 12px 35px 0 rgba(16, 39, 112, 0.25);
 }
-.btn:active,
-.btn:focus {
+.card .btn:active,
+.card .btn:focus {
   background-color: #ffeba7;
   color: #102770;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
-.btn:hover {
+.card .btn:hover {
   background-color: #ffeba7;
   color: #102770;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);

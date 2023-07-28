@@ -29,6 +29,11 @@ const routes = [
     name: "add-event",
     component: () => import("../views/AddEvent.vue"),
   },
+  {
+    path: "/edit-event/:id",
+    name: "edit-event",
+    component: () => import("../views/EditEvent.vue"),
+  },
 ];
 
 const router = createRouter({
