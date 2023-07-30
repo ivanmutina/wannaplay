@@ -60,16 +60,21 @@
           <div class="modal-body">
             <p class="text-start"><i class="fas fa-info-circle"></i> {{ selectedPost.description }}</p>
             <p class="text-start">
-              The event will take place on <span class="post-span">{{ selectedPost.date }} </span> at <span class="post-span">{{ selectedPost.time }}</span> in <span class="post-span">{{ selectedPost.place }}.</span>
+              <i class="far fa-calendar-alt"></i> The event will take place on <span class="post-span">{{ selectedPost.date }} </span> at <span class="post-span">{{ selectedPost.time }}</span> in
+              <span class="post-span">{{ selectedPost.place }}.</span> Places left: <span class="post-span">{{ selectedPost.players }}</span>
             </p>
 
             <p class="text-start"><i class="fas fa-phone"></i> +385 958128238</p>
+            <small> For more detailed instructions, please contact the organizer.</small>
           </div>
 
           <!-- modal footer -->
           <div class="modal-footer">
-            <button class="edit-btn" @click="editPost(selectedPost._id)">Edit</button>
-            <button class="close-btn" @click="removePost(selectedPost._id)">Delete</button>
+            <button class="red-btn" @click="removePost(selectedPost._id)">Delete</button>
+            <button class="blue-btn" @click="editPost(selectedPost._id)">Edit</button>
+
+            <button @click="cancelButton" class="red-btn">Cancel</button>
+            <button @click="joinButton" class="blue-btn">Join</button>
           </div>
         </div>
       </div>
@@ -88,6 +93,8 @@ export default {
       posts: [],
       selectedPost: {},
       searchQuery: "",
+      joinClicked: false,
+      cancelClicked: false,
     };
   },
   // dohvati sve postove
@@ -136,6 +143,35 @@ export default {
     onSearch() {
       // osvjezi prikaz postova cim upisem nesto
       this.refreshPosts();
+    },
+    // funckije gumbova za mjesta
+    async joinButton() {
+      // ako >0 i niti jedan gumb nije pritisnut
+      if (this.selectedPost.players > 0 && !this.joinClicked && !this.cancelClicked) {
+        this.selectedPost.players--;
+        this.joinClicked = true;
+
+        try {
+          // i na backend
+          await API.updatePlacesLeft(this.selectedPost._id, this.selectedPost.players);
+        } catch (err) {
+          console.log("Error: ", err);
+        }
+      }
+    },
+
+    async cancelButton() {
+      if (this.selectedPost.players > 0 && this.joinClicked && !this.cancelClicked) {
+        this.selectedPost.players++;
+        this.cancelClicked = true;
+
+        try {
+          // i na backend
+          await API.updatePlacesLeft(this.selectedPost._id, this.selectedPost.players);
+        } catch (err) {
+          console.log("Error: ", err);
+        }
+      }
     },
   },
 };
@@ -214,11 +250,12 @@ p {
 }
 
 /* modal */
-.close-btn {
+.red-btn {
   font-weight: 420;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   border: none;
   font-size: 16px;
+  width: 80px;
   cursor: pointer;
   border-radius: 5px;
   transition: all 200ms linear;
@@ -227,27 +264,28 @@ p {
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 
-.edit-btn {
-  font-weight: 420;
-  letter-spacing: 1.5px;
+.blue-btn {
+  font-weight: 500;
+  width: 80px;
+  letter-spacing: 1px;
   border: none;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
   transition: all 200ms linear;
+  background-color: #102770;
   color: #ffeba7;
-  background-color: #5bbd9c;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 
-.edit-btn:hover,
-.close-btn:hover {
+.blue-btn:hover,
+.red-btn:hover {
   color: #102770;
   background-color: rgb(249, 244, 244);
 }
 
 .post-span {
   color: #102770;
-  font-weight: 300;
+  font-weight: 500;
 }
 </style>

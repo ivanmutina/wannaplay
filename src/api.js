@@ -28,4 +28,9 @@ export default class API {
     const res = await axios.delete(`${url}/${id}`);
     return res.data;
   }
+  // Dodajemo novu metodu za ažuriranje broja "places left" na serveru
+  static async updatePlacesLeft(id, placesLeft) {
+    const res = await axios.patch(`${url}/${id}`, { players: placesLeft });
+    return res.data;
+  }
 }

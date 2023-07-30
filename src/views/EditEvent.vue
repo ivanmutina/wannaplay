@@ -44,6 +44,10 @@
                             <i class="input-icon fas fa-map-marker-alt"></i>
                           </div>
                           <div class="form-group mt-2">
+                            <input type="number" name="players" label="players" v-model="post.players" class="form-style" placeholder="Players needed" autocomplete="off" required />
+                            <i class="input-icon fas fa-question"></i>
+                          </div>
+                          <div class="form-group mt-2">
                             <input type="text" v-model="post.gender" class="form-style" placeholder="Gender" autocomplete="off" required />
                             <i class="input-icon fas fa-venus-mars"></i>
                           </div>
@@ -84,6 +88,7 @@ export default {
         date: "",
         time: "",
         place: "",
+        players: "",
         gender: "",
         contact: "",
         description: "",
@@ -102,6 +107,7 @@ export default {
       formData.append("date", this.post.date);
       formData.append("time", this.post.time);
       formData.append("place", this.post.place);
+      formData.append("players", this.post.players);
       formData.append("gender", this.post.gender);
       formData.append("contact", this.post.contact);
       formData.append("description", this.post.description);
@@ -177,7 +183,7 @@ a:hover {
 .card-wrap {
   width: 700px;
   max-width: 100%;
-  height: 600px;
+  height: 700px;
   perspective: 800px;
   margin-bottom: 60px;
 }

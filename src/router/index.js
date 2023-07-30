@@ -20,11 +20,6 @@ const routes = [
     component: () => import("../views/Signup.vue"),
   },
   {
-    path: "/change-pass",
-    name: "changePass",
-    component: () => import("../views/ChangePass.vue"),
-  },
-  {
     path: "/add-event",
     name: "add-event",
     component: () => import("../views/AddEvent.vue"),
@@ -47,7 +42,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ["/login", "/signup", "/change-pass"];
+  const publicPages = ["/login", "/signup"];
   // login potreban kada stranica na koju zelis ici nije u javnim stranicama
   const loginRequired = !publicPages.includes(to.path);
   const user = Auth.getUser();

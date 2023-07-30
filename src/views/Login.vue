@@ -22,7 +22,6 @@
                           <i class="input-icon fas fa-lock"></i>
                         </div>
                         <button type="submit" class="btn mt-4">submit</button>
-                        <p class="mb-0 mt-4 text-center"><router-link to="/change-pass" class="link">Change your password?</router-link></p>
                       </div>
                     </div>
                   </div>
@@ -71,15 +70,7 @@ body {
   background-color: #1f2029;
   overflow-x: hidden;
 }
-.link {
-  color: #c4c3ca;
-  cursor: pointer;
-  transition: all 200ms linear;
-}
-.link:hover {
-  color: #ffeba7;
-  text-decoration: none;
-}
+
 p {
   font-weight: 500;
   font-size: 14px;
