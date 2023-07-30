@@ -53,8 +53,15 @@ export default {
         let success = await Auth.signup(this.username, this.password);
         console.log("Rezultat prijave", success);
 
-        if (success == true) {
-          this.$router.push({ name: "login" });
+        if (success) {
+          // odmah autentificiraj korisnika
+          let loginSuccess = await Auth.login(this.username, this.password);
+          if (loginSuccess) {
+            this.$router.push({ name: "home" });
+            window.location.reload();
+          } else {
+            console.error("Error during login after registration.");
+          }
         }
       } catch (err) {
         console.error("Error:", err);

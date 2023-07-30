@@ -9,7 +9,7 @@
             <!-- search -->
             <div class="col-3">
               <form class="form-inline mt-4">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="searchQuery" @input="onSearch" />
               </form>
             </div>
             <!-- /search -->
@@ -87,6 +87,7 @@ export default {
     return {
       posts: [],
       selectedPost: {},
+      searchQuery: "",
     };
   },
   // dohvati sve postove
@@ -118,6 +119,23 @@ export default {
       const response = await API.deletePost(postId);
       this.$router.push({ name: "home" });
       window.location.reload();
+    },
+    // search
+    async refreshPosts() {
+      const search = this.searchQuery.trim();
+
+      if (search === "") {
+        // ako je unos prazan, dohvati sve postove
+        this.posts = await API.getAllPost();
+      } else {
+        // ako postoji unos, dohvatite postove (veliko malo slovo nebitno)
+        const filteredPosts = this.posts.filter((post) => post.title.toLowerCase().includes(search.toLowerCase()));
+        this.posts = filteredPosts;
+      }
+    },
+    onSearch() {
+      // osvjezi prikaz postova cim upisem nesto
+      this.refreshPosts();
     },
   },
 };

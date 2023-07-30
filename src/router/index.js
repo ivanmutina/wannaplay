@@ -34,6 +34,11 @@ const routes = [
     name: "edit-event",
     component: () => import("../views/EditEvent.vue"),
   },
+  {
+    path: "/profile",
+    name: "profile",
+    component: () => import("../views/Profile.vue"),
+  },
 ];
 
 const router = createRouter({
