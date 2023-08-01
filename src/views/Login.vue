@@ -14,11 +14,11 @@
                       <div class="section text-center">
                         <h4 class="mb-4 pb-3">Log In</h4>
                         <div class="form-group">
-                          <input v-model="username" type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off" />
+                          <input v-model="username" type="email" name="logemail" class="form-style" placeholder="Your Email" autocomplete="off" required />
                           <i class="input-icon fas fa-at"></i>
                         </div>
                         <div class="form-group mt-2">
-                          <input v-model="password" type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off" />
+                          <input v-model="password" type="password" name="logpass" class="form-style" placeholder="Your Password" autocomplete="off" required />
                           <i class="input-icon fas fa-lock"></i>
                         </div>
                         <button type="submit" class="btn mt-4">submit</button>
@@ -49,7 +49,6 @@ export default {
   methods: {
     async login() {
       let success = await Auth.login(this.username, this.password);
-      console.log("Rezultat prijave", success);
 
       if (success == true) {
         this.$router.push({ name: "home" });
@@ -176,13 +175,7 @@ h4 {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
   align-items: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
   justify-content: center;
   -ms-flex-pack: center;
   text-align: center;

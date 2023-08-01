@@ -30,9 +30,9 @@ const routes = [
     component: () => import("../views/EditEvent.vue"),
   },
   {
-    path: "/profile",
-    name: "profile",
-    component: () => import("../views/Profile.vue"),
+    path: "/account",
+    name: "account",
+    component: () => import("../views/Account.vue"),
   },
 ];
 

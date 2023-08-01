@@ -29,7 +29,7 @@
               <router-link v-if="auth.authenticated" class="nav-link" to="/add-event"><i class="fas fa-file-alt nav-i"></i><span class="nav-span">Add event</span></router-link>
             </li>
             <li class="nav-item">
-              <router-link v-if="auth.authenticated" class="nav-link" to="/profile"><i class="fas fa-user nav-i"></i><span class="nav-span">Profile</span></router-link>
+              <router-link v-if="auth.authenticated" class="nav-link" to="/account"><i class="fas fa-cog nav-i"></i><span class="nav-span">Account</span></router-link>
             </li>
             <li class="nav-item">
               <router-link v-if="auth.authenticated" @click="logout" class="nav-link" to="/login"><i class="fas fa-sign-out-alt nav-i"></i><span class="nav-span">Logout</span></router-link>

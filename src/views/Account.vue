@@ -5,7 +5,7 @@
       <div class="row mb-4 pb-2">
         <div class="col-md-8">
           <div class="text-md-start">
-            <h3 class="title mb-3 desc">Profile</h3>
+            <h3 class="title mb-3 desc">Account</h3>
             <p class="mb-0 mt-4 desc">You can change the password or delete your account.</p>
             <p class="desc">Be aware that deleting the account will also delete all the posted events.</p>
           </div>
@@ -17,7 +17,7 @@
       <div class="row">
         <div class="col-md-6 col-12">
           <!-- change pass form -->
-          <form @submit.prevent="changePass">
+          <form @submit.prevent="changePassword">
             <div class="card-wrap mx-auto">
               <div class="card-wrapper">
                 <div class="card">
@@ -25,14 +25,14 @@
                     <div class="section text-center">
                       <small>To change your password, first enter the old password and then the new password.</small>
                       <div class="form-group mt-4">
-                        <input v-model="old_password" type="email" name="oldpass" class="form-style" placeholder="Old password" id="logemail" autocomplete="off" />
+                        <input v-model="old_password" type="password" name="oldpass" class="form-style" placeholder="Old password" autocomplete="off" required />
                         <i class="input-icon fas fa-unlock"></i>
                       </div>
                       <div class="form-group mt-2">
-                        <input v-model="new_password" type="password" name="newpass" class="form-style" placeholder="New password" id="logpass" autocomplete="off" />
+                        <input v-model="new_password" type="password" name="newpass" class="form-style" placeholder="New password" autocomplete="off" required />
                         <i class="input-icon fas fa-lock"></i>
                       </div>
-                      <button type="submit" class="btn mt-4">Submit</button>
+                      <button type="submit" class="btn mt-4">Change</button>
                     </div>
                   </div>
                 </div>
@@ -44,7 +44,7 @@
 
         <div class="col-md-6 col-12">
           <!-- delete acc. form -->
-          <form @submit.prevent="changePass">
+          <form @submit.prevent="deleteAcc">
             <div class="card-wrap mx-auto">
               <div class="card-wrapper">
                 <div class="card">
@@ -52,7 +52,7 @@
                     <div class="section text-center">
                       <small>To confirm account deletion, please type this random keyword "jihdfa" down bellow.</small>
                       <div class="form-group mt-4">
-                        <input v-model="new_password" type="password" name="newpass" class="form-style" placeholder="Keyword" id="logpass" autocomplete="off" />
+                        <input v-model="deletion" type="password" name="newpass" class="form-style" placeholder="Keyword" autocomplete="off" required />
                         <i class="input-icon fas fa-trash-alt"></i>
                       </div>
                       <button type="submit" class="btn mt-4">Delete</button>
@@ -69,7 +69,24 @@
   </div>
 </template>
 
-<style>
+<script>
+import axios from "axios";
+import { Auth } from "@/services";
+
+export default {
+  data() {
+    return {
+      old_password: "",
+      new_password: "",
+    };
+  },
+  methods: {
+    async changePassword() {},
+  },
+};
+</script>
+
+<style scoped>
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 
 body {
@@ -180,32 +197,32 @@ a:hover {
   color: #ffeba7;
 }
 
-.btn {
-  border-radius: 5px;
-  height: 44px;
+.card .btn {
+  position: relative;
+  font-weight: 550;
   font-size: 15px;
-  font-weight: 600;
-  padding: 0 30px;
+  line-height: 2;
+  height: 50px;
+  width: 150px;
+  white-space: nowrap;
+  transition: all 200ms linear;
+  border-radius: 5px;
   letter-spacing: 1px;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  cursor: pointer;
   border: none;
+  background-color: #102770;
+  color: #ffeba7;
+  box-shadow: 0 12px 35px 0 rgba(16, 39, 112, 0.25);
+}
+.card .btn:active,
+.card .btn:focus {
   background-color: #ffeba7;
   color: #102770;
-  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
-}
-.btn:active,
-.btn:focus {
-  background-color: #102770;
-  color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
-.btn:hover {
-  background-color: #102770;
-  color: #ffeba7;
+.card .btn:hover {
+  background-color: #ffeba7;
+  color: #102770;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
 </style>

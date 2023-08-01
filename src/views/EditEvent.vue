@@ -242,35 +242,6 @@ a:hover {
   color: #ffeba7;
 }
 
-.btn {
-  border-radius: 5px;
-  height: 44px;
-  font-size: 15px;
-  font-weight: 600;
-  padding: 0 30px;
-  letter-spacing: 1px;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: #ffeba7;
-  color: #102770;
-  box-shadow: 0 8px 24px 0 rgba(255, 235, 167, 0.2);
-}
-.btn:active,
-.btn:focus {
-  background-color: #102770;
-  color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
-}
-.btn:hover {
-  background-color: #102770;
-  color: #ffeba7;
-  box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
-}
-
 textarea.form-style {
   height: 100px;
   max-height: 140px;

@@ -153,7 +153,7 @@ export default {
 
         try {
           // i na backend
-          await API.updatePlacesLeft(this.selectedPost._id, this.selectedPost.players);
+          await API.updatePlaces(this.selectedPost._id, this.selectedPost.players);
         } catch (err) {
           console.log("Error: ", err);
         }
@@ -167,7 +167,7 @@ export default {
 
         try {
           // i na backend
-          await API.updatePlacesLeft(this.selectedPost._id, this.selectedPost.players);
+          await API.updatePlaces(this.selectedPost._id, this.selectedPost.players);
         } catch (err) {
           console.log("Error: ", err);
         }
@@ -194,6 +194,10 @@ p {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.7;
+}
+
+.modal-body p {
+  color: rgb(20, 19, 19);
 }
 
 /* da je moguce scrollat */

@@ -15,11 +15,11 @@
                         <h4 class="mb-4 pb-3">Sign Up</h4>
 
                         <div class="form-group mt-2">
-                          <input type="email" v-model="username" name="signupmail" class="form-style" placeholder="Your Email" id="signupmail" autocomplete="off" />
+                          <input type="email" v-model="username" name="signupmail" class="form-style" placeholder="Your Email" autocomplete="off" required />
                           <i class="input-icon fas fa-at"></i>
                         </div>
                         <div class="form-group mt-2">
-                          <input type="password" v-model="password" name="signpass" class="form-style" placeholder="Your Password" id="signpass" autocomplete="off" />
+                          <input type="password" v-model="password" name="signpass" class="form-style" placeholder="Your Password" autocomplete="off" required />
                           <i class="input-icon fas fa-lock"></i>
                         </div>
                         <button type="submit" class="btn mt-4">submit</button>
@@ -186,7 +186,6 @@ h6 span {
 .input-icon {
   position: absolute;
   top: 0;
-
   left: 17px;
   font-size: 24px;
   line-height: 48px;
@@ -200,19 +199,12 @@ h6 span {
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
-
   padding: 0 30px;
   letter-spacing: 1px;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  -ms-align-items: center;
   align-items: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
   justify-content: center;
   -ms-flex-pack: center;
   text-align: center;
