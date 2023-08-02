@@ -1,6 +1,12 @@
 import axios from "axios";
 import $router from "@/router";
 
+// instanca axios-a
+let Service = axios.create({
+  baseURL: "http://localhost:3000",
+  timeout: 1000,
+});
+
 let Auth = {
   async login(username, password) {
     let response = await Service.post("/auth", {
@@ -57,6 +63,15 @@ let Auth = {
     }
     return false;
   },
+  async deleteUser(username) {
+    try {
+      const response = await axios.delete(`/user/${username}`);
+      return response.data.success;
+    } catch (error) {
+      console.error("Greška prilikom brisanja korisnika:", error);
+      return false; // Ako dođe do greške, vraćamo false
+    }
+  },
   state: {
     get authenticated() {
       return Auth.authenticated();
@@ -64,13 +79,7 @@ let Auth = {
   },
 };
 
-// instanca axios-a
-let Service = axios.create({
-  baseURL: "http://localhost:3000",
-  timeout: 1000,
-});
-
-// Axios interseptori
+// Axios interseptori, dodaj token u header
 Service.interceptors.request.use((request) => {
   try {
     let token = Auth.getToken();

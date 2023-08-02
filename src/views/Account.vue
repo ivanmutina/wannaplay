@@ -52,7 +52,7 @@
                     <div class="section text-center">
                       <small>To confirm account deletion, please type this random keyword "jihdfa" down bellow.</small>
                       <div class="form-group mt-4">
-                        <input v-model="deletion" type="password" name="newpass" class="form-style" placeholder="Keyword" autocomplete="off" required />
+                        <input v-model="deleteKeyword" type="text" class="form-style" placeholder="Keyword" autocomplete="off" required />
                         <i class="input-icon fas fa-trash-alt"></i>
                       </div>
                       <button type="submit" class="btn mt-4">Delete</button>
@@ -78,10 +78,72 @@ export default {
     return {
       old_password: "",
       new_password: "",
+      deleteKeyword: "",
     };
   },
   methods: {
-    async changePassword() {},
+    async changePassword() {
+      // dohvati trenutnog korisnika
+      const user = Auth.getUser();
+
+      // stara ne smije bit ista novoj
+      if (this.old_password === this.new_password) {
+        window.alert("New password must be different from the old password.");
+        return;
+      }
+
+      // provjera stare sifre i autentifikacija
+      try {
+        await axios.post("/auth", {
+          username: user.username,
+          password: this.old_password,
+        });
+
+        // ako valja, promijeni šifru (salje i header zbog middleware)
+        await axios.patch(
+          "/user",
+          {
+            old_password: this.old_password,
+            new_password: this.new_password,
+          },
+          {
+            headers: { Authorization: `Bearer ${user.token}` },
+          }
+        );
+
+        window.alert("Password successfully changed!");
+        this.$router.push({ name: "home" });
+      } catch (err) {
+        // ako ne valja
+        window.alert("Incorrect old password.");
+      }
+    },
+    async deleteAcc() {
+      if (this.deleteKeyword !== "jihdfa") {
+        window.alert("Incorrect keyword. Account is not deleted.");
+        return;
+      }
+
+      const user = Auth.getUser();
+      try {
+        // Kodiraj korisničko ime prije slanja zahtjeva za brisanje
+        const encodedUsername = encodeURIComponent(user.username);
+
+        // Provjera i brisanje korisnika
+        const isDeleted = await Auth.deleteUser(encodedUsername);
+        if (isDeleted) {
+          window.alert("Account successfully deleted.");
+          Auth.logout();
+          this.$router.go();
+        } else {
+          window.alert("Failed to delete account.");
+          console.log(err);
+        }
+      } catch (err) {
+        window.alert("Failed to delete account.");
+        console.log(err);
+      }
+    },
   },
 };
 </script>
