@@ -50,9 +50,9 @@
                 <div class="card">
                   <div class="center-wrap">
                     <div class="section text-center">
-                      <small>To confirm account deletion, please type this random keyword "jihdfa" down bellow.</small>
+                      <small>To confirm account deletion, please type this random keyword '<span v-text="keyword"></span>' down bellow.</small>
                       <div class="form-group mt-4">
-                        <input v-model="deleteKeyword" type="text" class="form-style" placeholder="Keyword" autocomplete="off" required />
+                        <input v-model="keywordInput" type="text" class="form-style" placeholder="Keyword" autocomplete="off" required />
                         <i class="input-icon fas fa-trash-alt"></i>
                       </div>
                       <button type="submit" class="btn mt-4">Delete</button>
@@ -72,14 +72,19 @@
 <script>
 import axios from "axios";
 import { Auth } from "@/services";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   data() {
     return {
       old_password: "",
       new_password: "",
-      deleteKeyword: "",
+      keyword: "",
+      keywordInput: "",
     };
+  },
+  created() {
+    this.generateKeyword();
   },
   methods: {
     async changePassword() {
@@ -118,30 +123,38 @@ export default {
         window.alert("Incorrect old password.");
       }
     },
+    async generateKeyword() {
+      const generatedKeyword = uuidv4().substring(0, 6); // Generirajte uuid i uzmite prvih 6 znakova
+      this.keyword = generatedKeyword; // Postavite generirani ključ u deleteKeyword
+    },
     async deleteAcc() {
-      if (this.deleteKeyword !== "jihdfa") {
+      if (this.keyword !== this.keywordInput) {
         window.alert("Incorrect keyword. Account is not deleted.");
         return;
       }
 
       const user = Auth.getUser();
       try {
-        // Kodiraj korisničko ime prije slanja zahtjeva za brisanje
+        // kodiram ime da mi posebni znakovi ne stvaraju problem
         const encodedUsername = encodeURIComponent(user.username);
 
-        // Provjera i brisanje korisnika
-        const isDeleted = await Auth.deleteUser(encodedUsername);
-        if (isDeleted) {
+        const headers = {
+          Authorization: `Bearer ${user.token}`,
+        };
+
+        // posalji zahtjeva za brisanje profila na backend
+        const response = await axios.delete(`/user/${encodedUsername}`, { headers });
+
+        if (response.data.success) {
           window.alert("Account successfully deleted.");
           Auth.logout();
           this.$router.go();
         } else {
           window.alert("Failed to delete account.");
-          console.log(err);
         }
-      } catch (err) {
+      } catch (error) {
+        console.error("Error deleting account:", error);
         window.alert("Failed to delete account.");
-        console.log(err);
       }
     },
   },
