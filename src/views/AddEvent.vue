@@ -92,8 +92,18 @@ export default {
         gender: "",
         contact: "",
         description: "",
+        userData: {},
       },
     };
+  },
+  mounted() {
+    // podaci iz localStorage
+    const userFromLocalStorage = localStorage.getItem("user");
+
+    if (userFromLocalStorage) {
+      // pretvori string u JSON objekt
+      this.userData = JSON.parse(userFromLocalStorage);
+    }
   },
   methods: {
     async submitForm() {
@@ -106,6 +116,7 @@ export default {
       formData.append("gender", this.post.gender);
       formData.append("contact", this.post.contact);
       formData.append("description", this.post.description);
+      formData.append("author", this.userData.username);
 
       // ako sve valja
       try {

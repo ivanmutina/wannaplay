@@ -48,11 +48,13 @@ export default {
   },
   methods: {
     async login() {
-      let success = await Auth.login(this.username, this.password);
+      let result = await Auth.login(this.username, this.password);
 
-      if (success == true) {
+      if (result !== null) {
         this.$router.push({ name: "home" });
         window.location.reload();
+      } else {
+        window.alert("Login failed. Please check your credentials and try again.");
       }
     },
   },

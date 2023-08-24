@@ -70,11 +70,11 @@
 
           <!-- modal footer -->
           <div class="modal-footer">
-            <button class="red-btn" @click="removePost(selectedPost._id)">Delete</button>
-            <button class="blue-btn" @click="editPost(selectedPost._id)">Edit</button>
+            <button v-if="isAuthor" class="red-btn" @click="removePost(selectedPost._id)">Delete</button>
+            <button v-if="isAuthor" class="blue-btn" @click="editPost(selectedPost._id)">Edit</button>
 
-            <button @click="cancelButton" class="red-btn">Cancel</button>
-            <button @click="joinButton" class="blue-btn">Join</button>
+            <button v-if="!isAuthor" class="red-btn" @click="cancelButton">Cancel</button>
+            <button v-if="!isAuthor" class="blue-btn" @click="joinButton">Join</button>
           </div>
         </div>
       </div>
@@ -95,7 +95,18 @@ export default {
       searchQuery: "",
       joinClicked: false,
       cancelClicked: false,
+      userData: {},
+      isAuthor: "",
     };
+  },
+  mounted() {
+    // podaci iz localStorage
+    const userFromLocalStorage = localStorage.getItem("user");
+
+    if (userFromLocalStorage) {
+      // pretvori string u JSON objekt
+      this.userData = JSON.parse(userFromLocalStorage);
+    }
   },
   // dohvati sve postove
   async created() {
@@ -108,6 +119,10 @@ export default {
         const post = await API.getPostByID(postId);
         // postavim 'selectedPost' na dobivene detalje posta
         this.selectedPost = post;
+
+        // je li trenutni user i author
+        this.isAuthor = this.selectedPost.author === this.userData.username;
+
         // pokaž modal, jQuery
         $("#exampleModal").modal("show");
       } catch (error) {

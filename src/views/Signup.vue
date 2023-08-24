@@ -60,7 +60,7 @@ export default {
             this.$router.push({ name: "home" });
             window.location.reload();
           } else {
-            window.alert("Error during login after registration.");
+            window.alert("Signup failed. Please try again.");
           }
         }
       } catch (err) {
