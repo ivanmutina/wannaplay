@@ -35,7 +35,7 @@ let Auth = {
       localStorage.setItem("user", JSON.stringify(user));
       return true;
     } catch (err) {
-      console.error("Greška prilikom registracije:", err);
+      console.error("Error during registration:", err);
       // Obradite grešku (npr. prikažite poruku o grešci korisniku)
       return false;
     }
@@ -68,8 +68,8 @@ let Auth = {
       const response = await axios.delete(`/user/${username}`);
       return response.data.success;
     } catch (error) {
-      console.error("Greška prilikom brisanja korisnika:", error);
-      return false; // Ako dođe do greške, vraćamo false
+      console.error("Error during account deletion:", error);
+      return false;
     }
   },
   state: {

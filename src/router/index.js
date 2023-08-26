@@ -34,6 +34,11 @@ const routes = [
     name: "account",
     component: () => import("../views/Account.vue"),
   },
+  {
+    path: "/:catchAll(.*)",
+    name: "404",
+    component: () => import("../views/404.vue"),
+  },
 ];
 
 const router = createRouter({
