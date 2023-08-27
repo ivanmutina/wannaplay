@@ -102,19 +102,9 @@ export default {
   },
   methods: {
     async updateForm() {
-      const formData = new FormData();
-      formData.append("title", this.post.title);
-      formData.append("date", this.post.date);
-      formData.append("time", this.post.time);
-      formData.append("place", this.post.place);
-      formData.append("players", this.post.players);
-      formData.append("gender", this.post.gender);
-      formData.append("contact", this.post.contact);
-      formData.append("description", this.post.description);
-
       // ako sve valja
       try {
-        const response = await API.updatePost(this.$route.params.id, formData);
+        const response = await API.updatePost(this.$route.params.id, this.post);
         // prebaci odma na home
         this.$router.push({ name: "home" });
       } catch (error) {

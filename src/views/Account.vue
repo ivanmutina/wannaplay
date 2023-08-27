@@ -73,6 +73,7 @@
 import axios from "axios";
 import { Auth } from "@/services";
 import { v4 as uuidv4 } from "uuid";
+import API from "../api";
 
 export default {
   data() {
@@ -81,10 +82,12 @@ export default {
       new_password: "",
       keyword: "",
       keywordInput: "",
+      posts: [],
     };
   },
-  created() {
+  async created() {
     this.generateKeyword();
+    this.posts = await API.getAllPost();
   },
   methods: {
     async changePassword() {
@@ -135,6 +138,13 @@ export default {
 
       const user = Auth.getUser();
       try {
+        // izbriši sve postove koji pripadaju korisniku
+        for (const post of this.posts) {
+          if (post.author === user.username) {
+            await API.deletePost(post._id);
+          }
+        }
+
         // kodiram ime da mi posebni znakovi ne stvaraju problem
         const encodedUsername = encodeURIComponent(user.username);
 

@@ -93,6 +93,7 @@ export default {
         contact: "",
         description: "",
         userData: {},
+        author: "",
       },
     };
   },
@@ -107,20 +108,10 @@ export default {
   },
   methods: {
     async submitForm() {
-      const formData = new FormData();
-      formData.append("title", this.post.title);
-      formData.append("date", this.post.date);
-      formData.append("time", this.post.time);
-      formData.append("place", this.post.place);
-      formData.append("players", this.post.players);
-      formData.append("gender", this.post.gender);
-      formData.append("contact", this.post.contact);
-      formData.append("description", this.post.description);
-      formData.append("author", this.userData.username);
-
-      // ako sve valja
       try {
-        const response = await API.addPost(formData);
+        // dodaj authora u post
+        this.post.author = this.userData.username;
+        const response = await API.addPost(this.post);
         // prebaci odma na home
         this.$router.push({ name: "home" });
       } catch (error) {
@@ -148,12 +139,6 @@ p {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.7;
-}
-
-/* da je moguce scrollat */
-.main {
-  overflow-y: auto;
-  max-height: 100vh;
 }
 
 /* prvi tekst */

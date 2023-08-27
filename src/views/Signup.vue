@@ -51,7 +51,7 @@ export default {
     async signup() {
       try {
         let success = await Auth.signup(this.username, this.password);
-        console.log("Rezultat prijave", success);
+        console.log("Result:", success);
 
         if (success) {
           // odmah autentificiraj korisnika

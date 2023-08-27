@@ -218,7 +218,7 @@ p {
 /* da je moguce scrollat */
 .main {
   overflow-y: auto;
-  max-height: 80vh;
+  max-height: 89vh;
 }
 
 /* prvi dio - opis */
