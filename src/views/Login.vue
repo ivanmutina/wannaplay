@@ -21,7 +21,7 @@
                           <input v-model="password" type="password" name="logpass" class="form-style" placeholder="Your Password" autocomplete="off" required />
                           <i class="input-icon fas fa-lock"></i>
                         </div>
-                        <button type="submit" class="btn mt-4">submit</button>
+                        <button type="submit" class="btn mt-4">SUBMIT</button>
                       </div>
                     </div>
                   </div>
@@ -48,12 +48,14 @@ export default {
   },
   methods: {
     async login() {
-      let result = await Auth.login(this.username, this.password);
+      try {
+        let result = await Auth.login(this.username, this.password);
 
-      if (result !== null) {
-        this.$router.push({ name: "home" });
-        window.location.reload();
-      } else {
+        if (result) {
+          this.$router.push({ name: "home" });
+          window.location.reload();
+        }
+      } catch (error) {
         window.alert("Login failed. Please check your credentials and try again.");
       }
     },
@@ -71,7 +73,6 @@ body {
   background-color: #1f2029;
   overflow-x: hidden;
 }
-
 p {
   font-weight: 500;
   font-size: 14px;
@@ -81,7 +82,6 @@ h4 {
   font-weight: 600;
   color: #c4c3ca;
 }
-
 .section {
   position: relative;
   width: 100%;
@@ -116,7 +116,6 @@ h4 {
   left: 0;
   top: 0;
 }
-
 .center-wrap {
   position: absolute;
   width: 100%;
@@ -127,7 +126,6 @@ h4 {
   z-index: 20;
   display: block;
 }
-
 .form-group {
   position: relative;
   display: block;
@@ -165,22 +163,15 @@ h4 {
   text-align: left;
   color: #ffeba7;
 }
-
 .btn {
   border-radius: 4px;
   height: 44px;
   font-size: 13px;
   font-weight: 600;
-  text-transform: uppercase;
   padding: 0 30px;
   letter-spacing: 1px;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  -ms-flex-pack: center;
-  text-align: center;
   border: none;
   background-color: #ffeba7;
   color: #102770;

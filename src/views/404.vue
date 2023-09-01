@@ -14,19 +14,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {};
-</script>
-
-<style scoped>
-@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
-
-p {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.7;
-  color: white;
-}
-</style>

@@ -87,7 +87,6 @@ Service.interceptors.request.use((request) => {
   } catch (e) {
     console.log(e);
   }
-
   return request;
 });
 

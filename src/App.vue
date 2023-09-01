@@ -68,18 +68,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
 nav {
   padding: 30px;
 }
-
 .nav-span {
   padding: 0 20px;
   font-weight: 600;
   font-size: 17px;
   color: #c4c3ca;
 }
-
 .nav-i {
   margin-right: -11px;
 }

@@ -134,13 +134,6 @@ body {
   overflow: hidden;
 }
 
-p {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.7;
-}
-
 /* prvi tekst */
 .desc {
   color: rgb(255, 254, 254);
@@ -154,7 +147,6 @@ a {
 a:hover {
   text-decoration: none;
 }
-
 .card-wrap {
   width: 700px;
   max-width: 100%;
@@ -174,7 +166,6 @@ a:hover {
   left: 0;
   top: 0;
 }
-
 .center-wrap {
   position: absolute;
   width: 100%;
@@ -183,7 +174,6 @@ a:hover {
   left: 0;
   transform: translate3d(0, -50%, 35px) perspective(100px);
 }
-
 .form-group {
   position: relative;
   display: block;
@@ -206,7 +196,6 @@ a:hover {
   border: none;
   box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
 }
-
 .input-icon {
   position: absolute;
   top: 0;
@@ -216,7 +205,6 @@ a:hover {
   text-align: left;
   color: #ffeba7;
 }
-
 textarea.form-style {
   height: 100px;
   max-height: 140px;

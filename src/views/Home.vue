@@ -37,7 +37,6 @@
                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="modal(post._id)">View details</button>
                 <small class="created-text pt-4">Created {{ formatDate(post.created) }}</small>
               </div>
-
               <!-- /gumb -->
             </div>
           </div>
@@ -76,6 +75,7 @@
             <button v-if="!isAuthor" class="red-btn" @click="cancelButton">Cancel</button>
             <button v-if="!isAuthor" class="blue-btn" @click="joinButton">Join</button>
           </div>
+          <!-- /modal footer -->
         </div>
       </div>
     </div>
@@ -159,7 +159,6 @@ export default {
       // osvjezi prikaz postova cim upisem nesto
       this.refreshPosts();
     },
-    // funckije gumbova za mjesta
     async joinButton() {
       // ako >0 i niti jedan gumb nije pritisnut
       if (this.selectedPost.players > 0 && !this.joinClicked && !this.cancelClicked) {
@@ -203,14 +202,11 @@ body {
   background-color: #1f2029;
   overflow: hidden;
 }
-
 p {
-  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.7;
 }
-
 .modal-body p {
   color: rgb(20, 19, 19);
 }
@@ -282,7 +278,6 @@ p {
   background-color: #832a45;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
-
 .blue-btn {
   font-weight: 500;
   width: 80px;
@@ -296,7 +291,6 @@ p {
   color: #ffeba7;
   box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
 }
-
 .blue-btn:hover,
 .red-btn:hover {
   color: #102770;

@@ -22,7 +22,7 @@
                           <input type="password" v-model="password" name="signpass" class="form-style" placeholder="Your Password" autocomplete="off" required />
                           <i class="input-icon fas fa-lock"></i>
                         </div>
-                        <button type="submit" class="btn mt-4">submit</button>
+                        <button type="submit" class="btn mt-4">SUBMIT</button>
                       </div>
                     </div>
                   </div>
@@ -50,21 +50,20 @@ export default {
   methods: {
     async signup() {
       try {
-        let success = await Auth.signup(this.username, this.password);
-        console.log("Result:", success);
+        let result = await Auth.signup(this.username, this.password);
 
-        if (success) {
+        if (result) {
           // odmah autentificiraj korisnika
           let loginSuccess = await Auth.login(this.username, this.password);
           if (loginSuccess) {
             this.$router.push({ name: "home" });
             window.location.reload();
-          } else {
-            window.alert("Signup failed. Please try again.");
           }
+        } else {
+          window.alert("Signup failed. Please try again.");
         }
       } catch (err) {
-        console.error("Error:", err);
+        return;
       }
     },
   },
@@ -116,7 +115,6 @@ h6 span {
 .full-height {
   min-height: 100vh;
 }
-
 .card-wrap {
   position: relative;
   width: 440px;
@@ -143,7 +141,6 @@ h6 span {
   left: 0;
   top: 0;
 }
-
 .center-wrap {
   position: absolute;
   width: 100%;
@@ -154,7 +151,6 @@ h6 span {
   z-index: 20;
   display: block;
 }
-
 .form-group {
   position: relative;
   display: block;
@@ -192,22 +188,15 @@ h6 span {
   text-align: left;
   color: #ffeba7;
 }
-
 .btn {
   border-radius: 4px;
   height: 44px;
   font-size: 13px;
   font-weight: 600;
-  text-transform: uppercase;
   padding: 0 30px;
   letter-spacing: 1px;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  -ms-flex-pack: center;
-  text-align: center;
   border: none;
   background-color: #ffeba7;
   color: #102770;

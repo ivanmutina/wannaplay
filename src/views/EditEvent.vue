@@ -55,6 +55,7 @@
                             <input type="text" v-model="post.contact" class="form-style" placeholder="Contact (number)" autocomplete="off" required />
                             <i class="input-icon fas fa-phone"></i>
                           </div>
+
                           <div class="form-group mt-2">
                             <textarea v-model="post.description" name="description" label="description" class="form-style" placeholder="Description" autocomplete="off" rows="4"></textarea>
                             <i class="input-icon fas fa-info-circle"></i>
@@ -137,13 +138,6 @@ body {
   overflow: hidden;
 }
 
-p {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.7;
-}
-
 /* da je moguce scrollat */
 .main {
   overflow-y: auto;
@@ -169,7 +163,6 @@ a:hover {
 .link:hover {
   color: #ffeba7;
 }
-
 .card-wrap {
   width: 700px;
   max-width: 100%;
@@ -189,7 +182,6 @@ a:hover {
   left: 0;
   top: 0;
 }
-
 .center-wrap {
   position: absolute;
   width: 100%;

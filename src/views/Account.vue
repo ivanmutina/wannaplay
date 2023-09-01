@@ -127,8 +127,8 @@ export default {
       }
     },
     async generateKeyword() {
-      const generatedKeyword = uuidv4().substring(0, 6); // Generirajte uuid i uzmite prvih 6 znakova
-      this.keyword = generatedKeyword; // Postavite generirani ključ u deleteKeyword
+      const generatedKeyword = uuidv4().substring(0, 6); // generiram uuid i uzmem 6 znakova
+      this.keyword = generatedKeyword;
     },
     async deleteAcc() {
       if (this.keyword !== this.keywordInput) {
@@ -184,19 +184,6 @@ body {
 small {
   color: white;
 }
-
-p {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.7;
-  color: white;
-}
-
-h4 {
-  color: white;
-}
-
 a {
   cursor: pointer;
   transition: all 200ms linear;
@@ -204,7 +191,6 @@ a {
 a:hover {
   text-decoration: none;
 }
-
 .section {
   width: 100%;
   display: block;
@@ -227,12 +213,10 @@ a:hover {
   width: 100%;
   height: 100%;
   background-color: #2a2b38;
-
   border-radius: 6px;
   left: 0;
   top: 0;
 }
-
 .center-wrap {
   position: absolute;
   width: 100%;
@@ -243,7 +227,6 @@ a:hover {
   z-index: 20;
   display: block;
 }
-
 .form-group {
   position: relative;
   display: block;
@@ -281,7 +264,6 @@ a:hover {
   text-align: left;
   color: #ffeba7;
 }
-
 .card .btn {
   position: relative;
   font-weight: 550;
