@@ -1,6 +1,6 @@
 // za kontakt sa serverom
 import axios from "axios";
-const url = "http://localhost:3000/api/post";
+const url = "https://wannaplay-k2zg.onrender.com/api/post";
 
 export default class API {
   // uhvati sve postove sa servera
