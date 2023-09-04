@@ -3,7 +3,7 @@ import $router from "@/router";
 
 // instanca axios-a
 let Service = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://wannaplay-k2zg.onrender.com",
   timeout: 1000,
 });
 
